@@ -43,6 +43,18 @@ public class ContactReaderModule extends ReactContextBaseJavaModule {
         promise.resolve(transferToWritableArray(contactManager.fetchContact()));
     }
 
+    @ReactMethod
+    public void readPhoneNumbers(Promise promise) {
+        Activity activity = getCurrentActivity();
+
+        if (activity == null) {
+            promise.reject(new ActivityNotFoundException());
+            return;
+        }
+        ContactManager contactManager = new ContactManager(getReactApplicationContext());
+        promise.resolve(transferToWritableStringArray(contactManager.fetchPhoneNumbers()));
+    }
+
     private WritableArray transferToWritableArray(List<Contact> contactList) {
         WritableArray contactArray = new WritableNativeArray();
 
@@ -58,5 +70,14 @@ public class ContactReaderModule extends ReactContextBaseJavaModule {
             contactArray.pushMap(contactMap);
         }
         return contactArray;
+    }
+
+    private WritableArray transferToWritableStringArray(List<String> contacts) {
+        WritableArray phoneArray = new WritableNativeArray();
+        for (int i = 0; i < contacts.size(); i++) {
+            String contact = contacts.get(i);
+            if (contact != null && !contact.isEmpty()) phoneArray.pushString(contact);
+        }
+        return phoneArray;
     }
 }

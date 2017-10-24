@@ -4,7 +4,7 @@
 		"type": "git",
 		"url": "https://github.com/umuieme/ContactManager-react-native"
 	},
-	"version": "0.0.1-beta-6",
+	"version": "0.0.1-beta-19",
 	"description": "React Native Contacts (android)",
 	"nativePackage": true,
 	"keywords": [
@@ -26,5 +26,4 @@
 	},
 	"author": "Umesh Basnet",
 	"contributors": [],
-	"license": "MIT"
 }

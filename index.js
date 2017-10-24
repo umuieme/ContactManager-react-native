@@ -7,12 +7,12 @@ export const ContactManager = {
             return PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_CONTACTS)
                 .then((status) => {
                     if (status) {
-                        return NativeModules.ContactReader.readContact();
+                        return NativeModules.ContactReader.readPhoneNumbers();
                     }
                     return PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS)
                         .then((granted) => {
                             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                                return NativeModules.ContactReader.readContact();
+                                return NativeModules.ContactReader.readPhoneNumbers();
                             }
                             return Promise.reject('permission not granted');
                         });
